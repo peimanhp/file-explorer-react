@@ -3,25 +3,23 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-function NewModal({
+function EditElement({
   show,
   setShow,
-  modalHeading,
   placeHolder,
-  addElement
+  
 }) {
   const [title, setTitle] = useState("");
 
   return (
     <Modal show={show} onHide={() => setShow(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>{modalHeading}</Modal.Title>
+        <Modal.Title>Update Title</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            addElement(title);
             setShow(false);
           }}
         >
@@ -45,15 +43,14 @@ function NewModal({
         <Button
           variant="primary"
           onClick={() => {
-            addElement(title);
             setShow(false);
           }}
         >
-          Save
+          Update
         </Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export default NewModal;
+export default EditElement;

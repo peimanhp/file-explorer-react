@@ -7,24 +7,27 @@ import { v4 as uuidv4 } from "uuid";
 
 function Element({
   setShow,
-  setModalHeading,
   elementTree,
+  setElementTree,
   setPlaceHolder,
 }) {
   const handleAddElement = () => {    
-    setModalHeading("New Folder");
     setPlaceHolder("");
     setShow(true);
   };
 
   const handleEdit = (element) => {
-    setModalHeading("Edit Title");
     setPlaceHolder(element.title);
     setShow(true);
   };
 
-  const handleDelete = (e) => {
-    console.log(e.target.parentNode.parentNode.id);
+  const handleDelete = (id) => {
+    if (id === 0) {
+      alert("you can not delete Root");
+      return;
+    }
+    const filtered = elementTree.filter(element => element.id != id)
+    setElementTree(filtered);
   };
 
   return elementTree.map((element) => (
@@ -49,7 +52,7 @@ function Element({
         >
           <img className="icons" src={editFile} alt="edit-file" />
         </button>
-        <button onClick={handleDelete} className="btn btn-light btn-operators">
+        <button onClick={()=>handleDelete(element.id)} className="btn btn-light btn-operators">
           <img className="icons" src={trash} alt="trash" />
         </button>
       </div>
