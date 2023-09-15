@@ -1,3 +1,49 @@
+* {
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
 body {
-  margin: 0;  
+  margin: 0;
+  padding: 40px;
+  background-color: #ebebeb !important;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+}
+
+.btn-folder {
+  display: flex !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  gap: 10px;
+  height: 50px;
+}
+
+.btn-wrapper {
+  display: flex;
+  gap: 30px;
+  margin-bottom: .7em;
+}
+
+.btn-wrapper:hover .btn-operators {
+  display: inline-block !important;
+}
+
+.operators-wrapper {
+  display: flex;
+  gap: 7px;
+}
+
+.btn-operators {  
+  min-width: 40px !important;
+  display: none !important;  
+}
+
+.icons {
+  width: auto;
+  height: 30px;
 }
