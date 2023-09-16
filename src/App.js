@@ -34,31 +34,10 @@ function App() {
   }
 
   function addFile(title) {
-    let extention = null;
-    let icon = null;
-    if (title.indexOf(".") > -1) {
-      extention = title.split(".").pop();
-      console.log(extention);
-      switch (extention) {
-        case "html":
-          icon = html;
-          break;
-        case "css":
-          icon = css;
-          break;
-        case "js":
-          icon = js;
-          break;
-        case "txt":
-          icon = txt;
-          break;
-      }
-    } else icon = unknownFile;
-    console.log(icon);
     let newFile = {
       id: uuidv4(),
       title,
-      icon,
+      icon: getIcon(title),
     };
     setElementTree([...elementTree, newFile]);
   }
@@ -70,11 +49,30 @@ function App() {
     }
     const updatedElementTree = elementTree.map((element) => {
       if (id === element.id) {
-        return { ...element, title };
+        return { ...element, title, icon: getIcon(title) };
       }
       return element;
     });
     setElementTree(updatedElementTree);
+  }
+
+  function getIcon(fileName) {
+    let extention = null;
+    let icon = null;
+    if (fileName.indexOf(".") > -1) {
+      extention = fileName.split(".").pop();
+      switch (extention) {
+        case "html":
+          return icon = html;          
+        case "css":
+          return icon = css;          
+        case "js":
+          return icon = js;          
+        case "txt":
+          return icon = txt;
+        default: return icon = unknownFile;
+      }
+    } else return icon = folder;
   }
 
   return (

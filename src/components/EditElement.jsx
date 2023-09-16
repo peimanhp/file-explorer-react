@@ -26,7 +26,7 @@ function EditElement({id, show, setShow, placeHolder, editElement }) {
                 setTitle(e.target.value);
               }}
               type="text"
-              placeholder={placeHolder ? placeHolder : null}
+              defaultValue={placeHolder}
               autoFocus
             />
           </Form.Group>
