@@ -3,12 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-function EditElement({
-  show,
-  setShow,
-  placeHolder,
-  
-}) {
+function EditElement({id, show, setShow, placeHolder, editElement }) {
   const [title, setTitle] = useState("");
 
   return (
@@ -20,6 +15,7 @@ function EditElement({
         <Form
           onSubmit={(e) => {
             e.preventDefault();
+            editElement(id, title);
             setShow(false);
           }}
         >
@@ -43,6 +39,7 @@ function EditElement({
         <Button
           variant="primary"
           onClick={() => {
+            editElement(id, title);
             setShow(false);
           }}
         >

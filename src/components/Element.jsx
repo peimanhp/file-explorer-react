@@ -6,19 +6,22 @@ import trash from "../images/trash.svg";
 import { v4 as uuidv4 } from "uuid";
 
 function Element({
-  setShow,
+  setId,
+  setAddShow,
+  setEditShow,
   elementTree,
   setElementTree,
   setPlaceHolder,
 }) {
-  const handleAddElement = () => {    
+  const handleAddElement = () => {
     setPlaceHolder("");
-    setShow(true);
+    setAddShow(true);
   };
 
   const handleEdit = (element) => {
+    setId(element.id);
     setPlaceHolder(element.title);
-    setShow(true);
+    setEditShow(true);
   };
 
   const handleDelete = (id) => {
@@ -26,7 +29,7 @@ function Element({
       alert("you can not delete Root");
       return;
     }
-    const filtered = elementTree.filter(element => element.id != id)
+    const filtered = elementTree.filter((element) => element.id !== id);
     setElementTree(filtered);
   };
 
@@ -52,7 +55,10 @@ function Element({
         >
           <img className="icons" src={editFile} alt="edit-file" />
         </button>
-        <button onClick={()=>handleDelete(element.id)} className="btn btn-light btn-operators">
+        <button
+          onClick={() => handleDelete(element.id)}
+          className="btn btn-light btn-operators"
+        >
           <img className="icons" src={trash} alt="trash" />
         </button>
       </div>
