@@ -5,11 +5,18 @@ import EditElement from "./components/EditElement";
 import { v4 as uuidv4 } from "uuid";
 
 import folder from "./images/folder.svg";
+import html from "./images/html5.svg";
+import css from "./images/css3.svg";
+import js from "./images/js.svg";
+import txt from "./images/text.svg";
+import unknownFile from "./images/unknownFile.svg";
 
 import "./App.css";
+import NewFile from "./components/NewFile";
 
 function App() {
   const [addShow, setAddShow] = useState(false);
+  const [showFile, setShowFile] = useState(false);
   const [editShow, setEditShow] = useState(false);
   const [placeHolder, setPlaceHolder] = useState("");
   const [id, setId] = useState("");
@@ -26,6 +33,36 @@ function App() {
     setElementTree([...elementTree, newElement]);
   }
 
+  function addFile(title) {
+    let extention = null;
+    let icon = null;
+    if (title.indexOf(".") > -1) {
+      extention = title.split(".").pop();
+      console.log(extention);
+      switch (extention) {
+        case "html":
+          icon = html;
+          break;
+        case "css":
+          icon = css;
+          break;
+        case "js":
+          icon = js;
+          break;
+        case "txt":
+          icon = txt;
+          break;
+      }
+    } else icon = unknownFile;
+    console.log(icon);
+    let newFile = {
+      id: uuidv4(),
+      title,
+      icon,
+    };
+    setElementTree([...elementTree, newFile]);
+  }
+
   function editElement(id, title) {
     if (id === 0) {
       alert("You can not edit Root");
@@ -33,10 +70,10 @@ function App() {
     }
     const updatedElementTree = elementTree.map((element) => {
       if (id === element.id) {
-        return {...element, title}
+        return { ...element, title };
       }
       return element;
-    })
+    });
     setElementTree(updatedElementTree);
   }
 
@@ -47,10 +84,12 @@ function App() {
         elementTree={elementTree}
         setElementTree={setElementTree}
         setAddShow={setAddShow}
+        setShowFile={setShowFile}
         setEditShow={setEditShow}
         setPlaceHolder={setPlaceHolder}
       />
       <NewElement show={addShow} setShow={setAddShow} addElement={addElement} />
+      <NewFile show={showFile} setShow={setShowFile} addFile={addFile} />
       <EditElement
         id={id}
         show={editShow}

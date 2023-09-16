@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 function Element({
   setId,
   setAddShow,
+  setShowFile,
   setEditShow,
   elementTree,
   setElementTree,
@@ -16,6 +17,11 @@ function Element({
   const handleAddElement = () => {
     setPlaceHolder("");
     setAddShow(true);
+  };
+
+  const handleAddFile = () => {
+    setPlaceHolder("");
+    setShowFile(true);
   };
 
   const handleEdit = (element) => {
@@ -46,7 +52,9 @@ function Element({
         >
           <img className="icons" src={newFolder} alt="new-folder" />
         </button>
-        <button className="btn btn-light btn-operators">
+        <button
+          onClick={handleAddFile}
+          className="btn btn-light btn-operators">
           <img className="icons" src={newFile} alt="new-file" />
         </button>
         <button

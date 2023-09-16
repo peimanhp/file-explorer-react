@@ -3,23 +3,19 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-function NewElement({
-  show,
-  setShow,
-  addElement
-}) {
+function NewFile({ show, setShow, addFile }) {
   const [title, setTitle] = useState("");
 
   return (
     <Modal show={show} onHide={() => setShow(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>New Folder</Modal.Title>
+        <Modal.Title>New File</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            addElement(title);
+            addFile(title);
             setShow(false);
           }}
         >
@@ -29,7 +25,7 @@ function NewElement({
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
-              type="text"              
+              type="text"
               autoFocus
             />
           </Form.Group>
@@ -42,7 +38,7 @@ function NewElement({
         <Button
           variant="primary"
           onClick={() => {
-            addElement(title);
+            addFile(title);
             setShow(false);
           }}
         >
@@ -53,4 +49,4 @@ function NewElement({
   );
 }
 
-export default NewElement;
+export default NewFile;
