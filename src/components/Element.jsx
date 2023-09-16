@@ -40,7 +40,10 @@ function Element({
   };
 
   return elementTree.map((element) => (
-    <div key={uuidv4()} className="btn-wrapper">
+    <div
+      key={uuidv4()}
+      className={element.type === "file" ? "btn-wrapper ms-5" : "btn-wrapper"}
+    >
       <button className="btn btn-light btn-folder">
         <img className="icons" src={element.icon} alt="element" />
         <p>{element.title}</p>
@@ -52,9 +55,7 @@ function Element({
         >
           <img className="icons" src={newFolder} alt="new-folder" />
         </button>
-        <button
-          onClick={handleAddFile}
-          className="btn btn-light btn-operators">
+        <button onClick={handleAddFile} className="btn btn-light btn-operators">
           <img className="icons" src={newFile} alt="new-file" />
         </button>
         <button

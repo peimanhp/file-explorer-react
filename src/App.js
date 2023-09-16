@@ -21,7 +21,7 @@ function App() {
   const [placeHolder, setPlaceHolder] = useState("");
   const [id, setId] = useState("");
   const [elementTree, setElementTree] = useState([
-    { id: 0, title: "Root", icon: folder },
+    { id: 0, title: "Root", icon: folder, type: "root" },
   ]);
 
   function addElement(title) {
@@ -29,17 +29,32 @@ function App() {
       id: uuidv4(),
       title,
       icon: folder,
+      type: "folder",
     };
     setElementTree([...elementTree, newElement]);
   }
 
   function addFile(title) {
-    let newFile = {
-      id: uuidv4(),
-      title,
-      icon: getIcon(title),
-    };
-    setElementTree([...elementTree, newFile]);
+    if (!isSame(title)) {
+      let newFile = {
+        id: uuidv4(),
+        title,
+        icon: getIcon(title),
+        type: "file",
+      };
+      setElementTree([...elementTree, newFile]);
+    }
+  }
+
+  function isSame(title) {
+    let same = false;
+    for (const element of elementTree) {
+      if (element.title === title) {
+        same = true;
+      }
+    }
+    if (same) alert("please enter a different title!");
+    return same;
   }
 
   function editElement(id, title) {
@@ -63,16 +78,17 @@ function App() {
       extention = fileName.split(".").pop();
       switch (extention) {
         case "html":
-          return icon = html;          
+          return (icon = html);
         case "css":
-          return icon = css;          
+          return (icon = css);
         case "js":
-          return icon = js;          
+          return (icon = js);
         case "txt":
-          return icon = txt;
-        default: return icon = unknownFile;
+          return (icon = txt);
+        default:
+          return (icon = unknownFile);
       }
-    } else return icon = folder;
+    } else return (icon = folder);
   }
 
   return (
