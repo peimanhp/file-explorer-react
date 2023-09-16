@@ -21,7 +21,6 @@ function App() {
   const [placeHolder, setPlaceHolder] = useState("");
   const [id, setId] = useState("");
   const [element, setElement] = useState("");
-    const [isRoot, setIsRoot] = useState(null);
   const [elementTree, setElementTree] = useState([
     { id: 0, title: "Root", icon: folder, type: "folder", children:[] },
   ]);
@@ -36,8 +35,7 @@ function App() {
         children: [],
       };
       console.log(element)
-      element.children.push(newElement);
-      // setElementTree([...elementTree, newElement]);
+      element.children.push(newElement);      
     }    
   }
 
@@ -50,12 +48,11 @@ function App() {
         type: "file",
         children: [],
       };
-      element.children.push(newFile);
-      // setElementTree([...elementTree, newFile]);
+      element.children.push(newFile);      
     }
   }
 
-  function isSame(title) {
+    function isSame(title) {
     let same = false;
     for (const element of elementTree) {
       if (element.title === title) {
@@ -111,9 +108,7 @@ function App() {
          setEditShow={setEditShow}
          setPlaceHolder={setPlaceHolder}
          setElement={setElement}
-         element={element}
-         isRoot={setIsRoot}
-         setIsRoot={setIsRoot}
+         element={element}         
        />
        <NewElement
          show={addShow}

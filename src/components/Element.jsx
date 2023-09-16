@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import newFolder from "../images/new-folder.svg";
 import newFile from "../images/new-file.svg";
 import editFile from "../images/edit.svg";
@@ -14,20 +14,12 @@ function Element({
   setElementTree,
   setPlaceHolder,
   setElement,
-  element,
-  isRoot,
-  setIsRoot,
+  element,  
 }) {
-  const [fatherEl, setFatherEl] = useState(null);
-
-  useEffect(() => {
-    setFatherEl(element);
-  }, [element]);
-
-  const handleAddElement = (element) => {    
+  const handleAddElement = (element) => {
     setPlaceHolder("");
     setAddShow(true);
-    setElement(element);    
+    setElement(element);
   };
 
   const handleAddFile = (element) => {
@@ -47,8 +39,9 @@ function Element({
       alert("you can not delete Root");
       return;
     }
-    const filtered = elementTree.filter((element) => element.id !== id);
-    setElementTree(filtered);
+    const filtered = element.children.filter((el) => el.id !== id);
+    element.children = filtered;
+    setPlaceHolder(element.title);
   };
 
   return elementTree.map((element) => {
@@ -116,7 +109,7 @@ function Element({
             {element.children && (
               <Element
                 elementTree={element.children}
-                setId={setId}                
+                setId={setId}
                 setElementTree={setElementTree}
                 setAddShow={setAddShow}
                 setShowFile={setShowFile}
@@ -124,8 +117,6 @@ function Element({
                 setPlaceHolder={setPlaceHolder}
                 setElement={setElement}
                 element={element}
-                isRoot={setIsRoot}
-                setIsRoot={setIsRoot}
               />
             )}
           </div>
