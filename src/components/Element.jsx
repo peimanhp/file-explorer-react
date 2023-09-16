@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+
 import newFolder from "../images/new-folder.svg";
 import newFile from "../images/new-file.svg";
-import editFile from "../images/edit.svg";
 import trash from "../images/trash.svg";
+
 import { v4 as uuidv4 } from "uuid";
 
 function Element({
   setId,
   setAddShow,
   setShowFile,
-  setEditShow,
   elementTree,
   setElementTree,
   setPlaceHolder,
   setElement,
-  element,  
+  element,
 }) {
+  const [count, setCount] = useState(0);
+
   const handleAddElement = (element) => {
     setPlaceHolder("");
     setAddShow(true);
@@ -28,10 +30,10 @@ function Element({
     setShowFile(true);
   };
 
-  const handleEdit = (element) => {
-    setId(element.id);
-    setPlaceHolder(element.title);
-    setEditShow(true);
+  const handleToggleFolder = (element) => {
+    if (count % 2 === 0) element.isOpen = false;
+    else element.isOpen = true;
+    setCount(count + 1);    
   };
 
   const handleDelete = (id) => {
@@ -51,7 +53,10 @@ function Element({
           <div className="ms-4">
             {element.type === "folder" ? (
               <div key={uuidv4()} className="btn-wrapper">
-                <button className="btn btn-light btn-folder">
+                <button
+                  onClick={() => handleToggleFolder(element)}
+                  className="btn btn-light btn-folder"
+                >
                   <img className="icons" src={element.icon} alt="element" />
                   <p>{element.title}</p>
                 </button>
@@ -71,12 +76,6 @@ function Element({
                     <img className="icons" src={newFile} alt="new-file" />
                   </button>
                   <button
-                    onClick={() => handleEdit(element)}
-                    className="btn btn-light btn-operators"
-                  >
-                    <img className="icons" src={editFile} alt="edit-file" />
-                  </button>
-                  <button
                     onClick={() => handleDelete(element.id)}
                     className="btn btn-light btn-operators"
                   >
@@ -92,12 +91,6 @@ function Element({
                 </button>
                 <div className="operators-wrapper">
                   <button
-                    onClick={() => handleEdit(element)}
-                    className="btn btn-light btn-operators"
-                  >
-                    <img className="icons" src={editFile} alt="edit-file" />
-                  </button>
-                  <button
                     onClick={() => handleDelete(element.id)}
                     className="btn btn-light btn-operators"
                   >
@@ -106,14 +99,13 @@ function Element({
                 </div>
               </div>
             )}
-            {element.children && (
+            {element.children && element.isOpen === true && (
               <Element
                 elementTree={element.children}
                 setId={setId}
                 setElementTree={setElementTree}
                 setAddShow={setAddShow}
                 setShowFile={setShowFile}
-                setEditShow={setEditShow}
                 setPlaceHolder={setPlaceHolder}
                 setElement={setElement}
                 element={element}

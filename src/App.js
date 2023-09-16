@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Element from "./components/Element";
 import NewElement from "./components/NewElement";
-import EditElement from "./components/EditElement";
 import { v4 as uuidv4 } from "uuid";
 
 import folder from "./images/folder.svg";
@@ -16,13 +15,12 @@ import NewFile from "./components/NewFile";
 
 function App() {
   const [addShow, setAddShow] = useState(false);
-  const [showFile, setShowFile] = useState(false);
-  const [editShow, setEditShow] = useState(false);
+  const [showFile, setShowFile] = useState(false);  
   const [placeHolder, setPlaceHolder] = useState("");
   const [id, setId] = useState("");
   const [element, setElement] = useState("");
   const [elementTree, setElementTree] = useState([
-    { id: 0, title: "Root", icon: folder, type: "folder", children:[] },
+    { id: 0, title: "Root", icon: folder, type: "folder", children:[], isOpen: true },
   ]);
 
   function addElement(title , element) {
@@ -33,6 +31,7 @@ function App() {
         icon: folder,
         type: "folder",
         children: [],
+        isOpen: true
       };
       console.log(element)
       element.children.push(newElement);      
@@ -63,20 +62,6 @@ function App() {
     return same;
   }
 
-  function editElement(id, title) {
-    if (id === 0) {
-      alert("You can not edit Root");
-      return;
-    }
-    const updatedElementTree = elementTree.map((element) => {
-      if (id === element.id) {
-        return { ...element, title, icon: getIcon(title) };
-      }
-      return element;
-    });
-    setElementTree(updatedElementTree);
-  }
-
   function getIcon(fileName) {
     let extention = null;
     let icon = null;
@@ -94,7 +79,7 @@ function App() {
         default:
           return (icon = unknownFile);
       }
-    } else return (icon = folder);
+    } else return (icon = unknownFile);
   }
 
    return (
@@ -104,8 +89,7 @@ function App() {
          elementTree={elementTree}
          setElementTree={setElementTree}
          setAddShow={setAddShow}
-         setShowFile={setShowFile}
-         setEditShow={setEditShow}
+         setShowFile={setShowFile}         
          setPlaceHolder={setPlaceHolder}
          setElement={setElement}
          element={element}         
@@ -121,14 +105,7 @@ function App() {
          setShow={setShowFile}
          addFile={addFile}
          element={element}
-       />
-       <EditElement
-         id={id}
-         show={editShow}
-         setShow={setEditShow}
-         editElement={editElement}
-         placeHolder={placeHolder}
-       />
+       />       
      </>
    );
 }
