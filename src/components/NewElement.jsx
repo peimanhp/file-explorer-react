@@ -6,7 +6,8 @@ import Modal from "react-bootstrap/Modal";
 function NewElement({
   show,
   setShow,
-  addElement
+  addElement,
+  element
 }) {
   const [title, setTitle] = useState("");
 
@@ -19,7 +20,7 @@ function NewElement({
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            addElement(title);
+            addElement(title, element);
             setShow(false);
           }}
         >
@@ -42,7 +43,7 @@ function NewElement({
         <Button
           variant="primary"
           onClick={() => {
-            addElement(title);
+            addElement(title, element);
             setShow(false);
           }}
         >

@@ -20,31 +20,38 @@ function App() {
   const [editShow, setEditShow] = useState(false);
   const [placeHolder, setPlaceHolder] = useState("");
   const [id, setId] = useState("");
+  const [element, setElement] = useState("");
+    const [isRoot, setIsRoot] = useState(null);
   const [elementTree, setElementTree] = useState([
-    { id: 0, title: "Root", icon: folder, type: "root" },
+    { id: 0, title: "Root", icon: folder, type: "folder", children:[] },
   ]);
 
-  function addElement(title) {
+  function addElement(title , element) {
     if (!isSame(title)) {
       let newElement = {
         id: uuidv4(),
         title,
         icon: folder,
         type: "folder",
+        children: [],
       };
-      setElementTree([...elementTree, newElement]);
+      console.log(element)
+      element.children.push(newElement);
+      // setElementTree([...elementTree, newElement]);
     }    
   }
 
-  function addFile(title) {
+  function addFile(title, element) {
     if (!isSame(title)) {
       let newFile = {
         id: uuidv4(),
         title,
         icon: getIcon(title),
         type: "file",
+        children: [],
       };
-      setElementTree([...elementTree, newFile]);
+      element.children.push(newFile);
+      // setElementTree([...elementTree, newFile]);
     }
   }
 
@@ -93,28 +100,42 @@ function App() {
     } else return (icon = folder);
   }
 
-  return (
-    <>
-      <Element
-        setId={setId}
-        elementTree={elementTree}
-        setElementTree={setElementTree}
-        setAddShow={setAddShow}
-        setShowFile={setShowFile}
-        setEditShow={setEditShow}
-        setPlaceHolder={setPlaceHolder}
-      />
-      <NewElement show={addShow} setShow={setAddShow} addElement={addElement} />
-      <NewFile show={showFile} setShow={setShowFile} addFile={addFile} />
-      <EditElement
-        id={id}
-        show={editShow}
-        setShow={setEditShow}
-        editElement={editElement}
-        placeHolder={placeHolder}
-      />
-    </>
-  );
+   return (
+     <>
+       <Element
+         setId={setId}
+         elementTree={elementTree}
+         setElementTree={setElementTree}
+         setAddShow={setAddShow}
+         setShowFile={setShowFile}
+         setEditShow={setEditShow}
+         setPlaceHolder={setPlaceHolder}
+         setElement={setElement}
+         element={element}
+         isRoot={setIsRoot}
+         setIsRoot={setIsRoot}
+       />
+       <NewElement
+         show={addShow}
+         setShow={setAddShow}
+         addElement={addElement}
+         element={element}
+       />
+       <NewFile
+         show={showFile}
+         setShow={setShowFile}
+         addFile={addFile}
+         element={element}
+       />
+       <EditElement
+         id={id}
+         show={editShow}
+         setShow={setEditShow}
+         editElement={editElement}
+         placeHolder={placeHolder}
+       />
+     </>
+   );
 }
 
 export default App;

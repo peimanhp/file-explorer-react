@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-function NewFile({ show, setShow, addFile }) {
+function NewFile({ show, setShow, addFile, element }) {
   const [title, setTitle] = useState("");
 
   return (
@@ -15,7 +15,7 @@ function NewFile({ show, setShow, addFile }) {
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            addFile(title);
+            addFile(title, element);
             setShow(false);
           }}
         >
@@ -37,8 +37,8 @@ function NewFile({ show, setShow, addFile }) {
         </Button>
         <Button
           variant="primary"
-          onClick={() => {
-            addFile(title);
+          onClick={() => {            
+            addFile(title, element);
             setShow(false);
           }}
         >
