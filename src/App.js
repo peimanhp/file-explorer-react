@@ -25,13 +25,15 @@ function App() {
   ]);
 
   function addElement(title) {
-    let newElement = {
-      id: uuidv4(),
-      title,
-      icon: folder,
-      type: "folder",
-    };
-    setElementTree([...elementTree, newElement]);
+    if (!isSame(title)) {
+      let newElement = {
+        id: uuidv4(),
+        title,
+        icon: folder,
+        type: "folder",
+      };
+      setElementTree([...elementTree, newElement]);
+    }    
   }
 
   function addFile(title) {
