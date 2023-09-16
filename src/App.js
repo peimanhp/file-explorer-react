@@ -54,8 +54,8 @@ function App() {
 
     function isSame(title) {
     let same = false;
-    for (const element of elementTree) {
-      if (element.title === title) {
+    for (const el of element.children) {
+      if (el.title === title) {
         same = true;
       }
     }
