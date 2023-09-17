@@ -54,7 +54,7 @@ function App() {
     function isSame(title) {
     let same = false;
     for (const el of element.children) {
-      if (el.title === title) {
+      if (el.title.toLowerCase() === title.toLowerCase()) {
         same = true;
       }
     }
