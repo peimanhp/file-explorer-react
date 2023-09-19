@@ -24,7 +24,8 @@ function App() {
   ]);
 
   function addElement(title , element) {
-    if (!isSame(title)) {
+    let type = "folder"
+    if (!isSame(title, type)) {
       let newElement = {
         id: uuidv4(),
         title,
@@ -39,7 +40,8 @@ function App() {
   }
 
   function addFile(title, element) {
-    if (!isSame(title)) {
+    let type = "file"
+    if (!isSame(title, type)) {
       let newFile = {
         id: uuidv4(),
         title,
@@ -51,10 +53,10 @@ function App() {
     }
   }
 
-    function isSame(title) {
+    function isSame(title, type) {
     let same = false;
     for (const el of element.children) {
-      if (el.title.toLowerCase() === title.toLowerCase()) {
+      if (el.title.toLowerCase() === title.toLowerCase() && el.type === type) {
         same = true;
       }
     }
