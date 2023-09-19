@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/file-explorer-react/static/css/main.e09a5a29.css",
+    "main.js": "/file-explorer-react/static/js/main.f3574ef3.js",
+    "static/media/unknownFile.svg": "/file-explorer-react/static/media/unknownFile.9d1bea69f595ee3397651d40292c4e99.svg",
+    "static/media/js.svg": "/file-explorer-react/static/media/js.bffe8173ed7f6082ea16c50903494f2d.svg",
+    "index.html": "/file-explorer-react/index.html",
+    "static/media/new-file.svg": "/file-explorer-react/static/media/new-file.2e09bcae41b6f21f59f948e08ce1b54c.svg",
+    "static/media/new-folder.svg": "/file-explorer-react/static/media/new-folder.f92b55e875b62f961226a6819d53c1b8.svg",
+    "static/media/text.svg": "/file-explorer-react/static/media/text.88bacbbf9b753342be1bb91ad280b841.svg",
+    "static/media/trash.svg": "/file-explorer-react/static/media/trash.9df9e3a5e461d06e3d963d1fd5336a23.svg",
+    "static/media/css3.svg": "/file-explorer-react/static/media/css3.ab607ef91025f17cd23d0b09f471033b.svg",
+    "static/media/html5.svg": "/file-explorer-react/static/media/html5.2bdd7259d54032f442015503b1caff62.svg",
+    "static/media/folder.svg": "/file-explorer-react/static/media/folder.56408d481ced39ae8a77907e793ce726.svg",
+    "main.e09a5a29.css.map": "/file-explorer-react/static/css/main.e09a5a29.css.map",
+    "main.f3574ef3.js.map": "/file-explorer-react/static/js/main.f3574ef3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e09a5a29.css",
+    "static/js/main.f3574ef3.js"
+  ]
+}
